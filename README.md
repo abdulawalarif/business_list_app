@@ -1,16 +1,19 @@
-# business_list_app
+# Tech Notes: Business List App
 
-A new Flutter project.
+## Architecture
+This app follows a layered architecture:
+1.  **Data Layer**: `BusinessApiService` (Dio) and `BusinessRepository` (Hive). The repo handles the "single source of truth," first trying the network and falling back to local cache.
+2.  **State Management Layer**: `BusinessProvider` (Provider package) holds the app's state and business logic, notifying the UI of changes.
+3.  **Presentation Layer**: UI widgets (`HomePage`, `BusinessListTile`) consume the provider and render the state.
 
-## Getting Started
+## Key Trade-offs & Decisions
+*   **Provider over BLoC/Riverpod**: Chosen for simplicity and to match the assignment requirements. For a larger app, Riverpod's compile-time safety would be better.
+*   **Hive for Local Storage**: Chosen for its simplicity, speed, and native Dart support. It's easier to set up than SQLite for this simple object list.
+*   **Generic BusinessCard**: The card is a generic widget that accepts a builder function. This makes it truly reusable for any data model, but adds a small amount of boilerplate (the need for a `BusinessListTile`). The alternative was to make it accept specific `Business` properties, which would be less flexible.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Improvements with More Time
+1.  **Testing**: Add unit tests for the `Business.fromJson()` method, the `BusinessProvider`, and widget tests for the UI states.
+2.  **Detailed Error Handling**: Differentiate between network errors, parsing errors, and empty states with specific messages and UI.
+3.  **Pull-to-Refresh**: Implement a `RefreshIndicator` for a better UX than just the FAB.
+4.  **Search/Filtering**: Add functionality to search through the list of businesses.
+5.  **Dependency Injection**: Use a package like `get_it` to better manage the creation of `Repository` and `Provider`, making it easier to mock dependencies for testing.
