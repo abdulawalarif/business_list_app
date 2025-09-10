@@ -25,6 +25,3 @@ This app follows a layered architecture:
 3.  **Pull-to-Refresh**: Implement a `RefreshIndicator` for a better UX than just the FAB.
 4.  **Search/Filtering**: Add functionality to search through the list of businesses.
 5.  **Dependency Injection**: Use a package like `get_it` to better manage the creation of `Repository` and `Provider`, making it easier to mock dependencies for testing.
-
-
-<img src="snap/initial.jpg" width="15%" alt="Apps state on initialization" />
