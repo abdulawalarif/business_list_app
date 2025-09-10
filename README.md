@@ -1,5 +1,13 @@
 # Tech Notes: Business List App
 
+
+## App Preview
+
+| Loading State | Data Loaded |
+| :---: | :---: |
+| <img src="snap/initial.jpg" width="25%" alt="Apps state on initialization" /> | <img src="snap/loaded.jpg" width="25%" alt="Apps state on initialization" />
+
+
 ## Architecture
 This app follows a layered architecture:
 1.  **Data Layer**: `BusinessApiService` (Dio) and `BusinessRepository` (Hive). The repo handles the "single source of truth," first trying the network and falling back to local cache.
@@ -17,3 +25,6 @@ This app follows a layered architecture:
 3.  **Pull-to-Refresh**: Implement a `RefreshIndicator` for a better UX than just the FAB.
 4.  **Search/Filtering**: Add functionality to search through the list of businesses.
 5.  **Dependency Injection**: Use a package like `get_it` to better manage the creation of `Repository` and `Provider`, making it easier to mock dependencies for testing.
+
+
+<img src="snap/initial.jpg" width="15%" alt="Apps state on initialization" />
